@@ -27,11 +27,11 @@ public static class CreateScriptableObject
 	}
     
     [MenuItem("Custom/Create Scriptable Object/Create New Settings Holder")]
-    public static void CreateListViewTasksHolder()
+    public static void CreateSettingsHolder()
     {
 
-        SerializableSettings globalSettingsHolder =
-            ScriptableObject.CreateInstance<SerializableSettings>();
+        AppSettings globalSettingsHolder =
+            ScriptableObject.CreateInstance<AppSettings>();
         AssetDatabase.CreateAsset(globalSettingsHolder,
             "Assets/Resources/ScriptableObjects/GlobalSettings.asset");
         AssetDatabase.SaveAssets();
@@ -39,5 +39,17 @@ public static class CreateScriptableObject
         EditorUtility.FocusProjectWindow();
         Selection.activeObject = globalSettingsHolder;
     }
-    
+    [MenuItem("Custom/Create Scriptable Object/Create New Profile Settings Holder")]
+    public static void CreateProfileSettingsHolder()
+    {
+
+        ProfileSettings profileSettingsHolder =
+            ScriptableObject.CreateInstance<ProfileSettings>();
+        AssetDatabase.CreateAsset(profileSettingsHolder,
+            "Assets/Resources/ScriptableObjects/ProfileSettings.asset");
+        AssetDatabase.SaveAssets();
+
+        EditorUtility.FocusProjectWindow();
+        Selection.activeObject = profileSettingsHolder;
+    }
 }

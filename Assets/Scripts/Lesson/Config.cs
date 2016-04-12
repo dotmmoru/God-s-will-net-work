@@ -15,5 +15,5 @@ public class Config {
 
     public const int MaxChatMessageCount = 7;
 
-    public const string ServerUri = "http://localhost:8080/test/index.php";
+    public const string ServerUri = "http://localhost/black_day/index.php";
 }

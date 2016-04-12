@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class PanelSwitchController : MonoBehaviour {
 
+    public Image panelProfile;
     public Image panelCreate;
     public Image panelFind;
     public Image panelSettings;
     public Image panelFAQ;
 
+    public Image buttonProfileImage;
     public Image buttonCreateImage;
     public Image buttonFindImage;
     public Image buttonSettingsImage;
@@ -21,12 +23,15 @@ public class PanelSwitchController : MonoBehaviour {
 	void Start () {
      //   appSettingsHolder = (AppSettingsHolder)Resources.Load(Constants.PATH_APP_SETTINGS_HOLDER, typeof(AppSettingsHolder));
 
-        UpdateProfileTabs(EnumMenuPanels.create);                       // set create tab with start scene 
+        UpdateProfileTabs(EnumMenuPanels.profile);                       // set create tab with start scene 
 	}
 
+    public void ButtonClickProfle()
+    {
+        UpdateProfileTabs(EnumMenuPanels.profile);
+    }
     public void ButtonClickCreate()
     {
-
         UpdateProfileTabs(EnumMenuPanels.create);
     }
     public void ButtonClickFind()
@@ -48,9 +53,20 @@ public class PanelSwitchController : MonoBehaviour {
        // appSettingsHolder.currentProfileSceneTabs = enumProfileSceneTabs;
         switch (enumMenuPanels)
         {
+            case EnumMenuPanels.profile:
+                {
+                    InitPanel(true,false, false, false, false);
+                    buttonProfileImage.color = greyColor;
+                    buttonCreateImage.color = whiteColor;
+                    buttonFindImage.color = whiteColor;
+                    buttonSettingsImage.color = whiteColor;
+                    buttonFAQImage.color = whiteColor;
+                    break;
+                }
             case EnumMenuPanels.create:
                 {
-                    InitPanel(true, false, false,false);
+                    InitPanel(false,true, false, false,false);
+                    buttonProfileImage.color = whiteColor;
                     buttonCreateImage.color = greyColor;
                     buttonFindImage.color = whiteColor;
                     buttonSettingsImage.color = whiteColor;
@@ -59,7 +75,8 @@ public class PanelSwitchController : MonoBehaviour {
                 }
             case EnumMenuPanels.find:
                 {
-                    InitPanel(false, true, false,false);
+                    InitPanel(false, false, true, false, false);
+                    buttonProfileImage.color = whiteColor;
                     buttonCreateImage.color = whiteColor;
                     buttonFindImage.color = greyColor;
                     buttonSettingsImage.color = whiteColor;
@@ -68,8 +85,9 @@ public class PanelSwitchController : MonoBehaviour {
                 }
             case EnumMenuPanels.settings:
                 {
-                   
-                    InitPanel(false, false, true,false);
+
+                    InitPanel(false, false, false, true, false);
+                    buttonProfileImage.color = whiteColor;
                     buttonCreateImage.color = whiteColor;
                     buttonFindImage.color = whiteColor;
                     buttonSettingsImage.color = greyColor;
@@ -78,7 +96,8 @@ public class PanelSwitchController : MonoBehaviour {
                 }
             case EnumMenuPanels.faq:
                 {
-                    InitPanel(false, false, false,true);
+                    InitPanel(false,false, false, false, true);
+                    buttonProfileImage.color = whiteColor;
                     buttonCreateImage.color = whiteColor;
                     buttonFindImage.color = whiteColor;
                     buttonSettingsImage.color = whiteColor;
@@ -87,14 +106,15 @@ public class PanelSwitchController : MonoBehaviour {
                 }
             default:
                 {
-                    //Log.debug("Scene Profile ", "profile tabs error");
+                    Log.debug("Console: ", "PanelSwitchController - default");
                     break;
                 }
         }
     }
 
-    void InitPanel(bool isCreateActive, bool isFindActive, bool isSettingsActive, bool isFAQActive)
+    void InitPanel(bool isProfileActive,bool isCreateActive, bool isFindActive, bool isSettingsActive, bool isFAQActive)
     {
+        panelProfile.gameObject.SetActive(isProfileActive);
         panelCreate.gameObject.SetActive(isCreateActive);
         panelFind.gameObject.SetActive(isFindActive);
         panelSettings.gameObject.SetActive(isSettingsActive);
